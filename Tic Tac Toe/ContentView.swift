@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @State private var moves: [Move?] = Array(repeating: nil, count: 9)
     @State private var isGameboardDisable = false
+    @State private var alertItem: AlertItem?
         
     var body: some View {
         GeometryReader { geometry in
@@ -39,16 +40,18 @@ struct ContentView: View {
                             
                             //1.User move
                             moves[i] = Move(player: .human, boardIndex: i)
-                            isGameboardDisable = true//Prevents user from tapping another space before the computer makes a move
                             
                             //Check for win conditions
                             if checkWinCondition(for: .human, in: moves){
-                                print("Human won")
-                            }
-                            if checkForDraw(in: moves){
-                                print("No winner")
+                                alertItem =  AletContext.humanWin
                                 return
                             }
+                            if checkForDraw(in: moves){
+                                alertItem =  AletContext.draw
+                                return
+                            }
+                            
+                            isGameboardDisable = true//Prevents user from tapping another space before the computer makes a move
                             
                             //2.After a half sec delay computer will make a move
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -58,11 +61,12 @@ struct ContentView: View {
                                 
                                 //Check for win conditions
                                 if checkWinCondition(for: .computer, in: moves){
-                                    print("A.I won")
+                                    alertItem =  AletContext.computerWin
+                                    return
                                 }
                                 
                                 if checkForDraw(in: moves){
-                                    print("No winner")
+                                    alertItem =  AletContext.draw
                                     return
                                 }
                             }
@@ -74,6 +78,9 @@ struct ContentView: View {
             }
             .disabled(isGameboardDisable)
             .padding()
+            .alert(item: $alertItem, content: { alertItem in
+                Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { resetGame() }))
+            })
         }
     }
     
@@ -108,6 +115,10 @@ struct ContentView: View {
     func checkForDraw(in moves: [Move?]) -> Bool {
         //CompactMap will remove the nils to check the count of moves, if = 9 then thats the max and is a drawn
         return moves.compactMap{ $0 }.count == 9
+    }
+    
+    func resetGame() {
+        moves =  Array(repeating: nil, count: 9)
     }
 }
 
