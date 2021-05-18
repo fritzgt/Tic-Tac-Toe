@@ -43,11 +43,11 @@ struct GameView: View {
                             
                             //Check for win conditions
                             if checkWinCondition(for: .human, in: moves){
-                                alertItem =  AletContext.humanWin
+                                alertItem =  AlertContext.humanWin
                                 return
                             }
                             if checkForDraw(in: moves){
-                                alertItem =  AletContext.draw
+                                alertItem =  AlertContext.draw
                                 return
                             }
                             
@@ -61,12 +61,12 @@ struct GameView: View {
                                 isGameboardDisable = false
                                 //Check for win conditions
                                 if checkWinCondition(for: .computer, in: moves){
-                                    alertItem =  AletContext.computerWin
+                                    alertItem =  AlertContext.computerWin
                                     return
                                 }
                                 
                                 if checkForDraw(in: moves){
-                                    alertItem =  AletContext.draw
+                                    alertItem =  AlertContext.draw
                                     return
                                 }
                                 

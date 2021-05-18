@@ -11,6 +11,7 @@ import SwiftUI
 //ObservableObject To manage state
 final class GameViewModel: ObservableObject {
     
+    // MARK: - Properties
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
@@ -18,7 +19,11 @@ final class GameViewModel: ObservableObject {
     @Published var moves: [Move?] = Array(repeating: nil, count: 9)
     @Published var isGameboardDisable = false
     @Published var alertItem: AlertItem?
+    @Published var humanScore: String = "0"
+    @Published var computerScore: String = "0"
+    var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
     
+    // MARK: - Methods
     func processPlayerMove(for position: Int) {
         //Prevents user from overwriting an occupied space
         if isSquareOccupied(in: moves, forIndex: position){ return }
@@ -28,11 +33,12 @@ final class GameViewModel: ObservableObject {
         
         //Check for win conditions
         if checkWinCondition(for: .human, in: moves){
-            alertItem =  AletContext.humanWin
+            alertItem =  AlertContext.humanWin
+            increaseCounter(for: .human)
             return
         }
         if checkForDraw(in: moves){
-            alertItem =  AletContext.draw
+            alertItem =  AlertContext.draw
             return
         }
         
@@ -46,23 +52,29 @@ final class GameViewModel: ObservableObject {
             isGameboardDisable = false
             //Check for win conditions
             if checkWinCondition(for: .computer, in: moves){
-                alertItem =  AletContext.computerWin
+                alertItem =  AlertContext.computerWin
+                increaseCounter(for: .computer)
                 return
             }
             
             if checkForDraw(in: moves){
-                alertItem =  AletContext.draw
+                alertItem =  AlertContext.draw
                 return
             }
             
         }
     }
     
-    func isSquareOccupied(in moves: [Move?], forIndex index: Int) -> Bool {
+    func resetGame() {
+    moves =  Array(repeating: nil, count: 9)
+    }
+    
+    // MARK: - Private Methods
+    private func isSquareOccupied(in moves: [Move?], forIndex index: Int) -> Bool {
         return moves.contains(where: {$0?.boardIndex == index})
     }
     
-    func determineComputerMovePosition(in moves: [Move?]) -> Int {
+    private func determineComputerMovePosition(in moves: [Move?]) -> Int {
         //If AI can win, then win
         //1.Posible win positions
         let winPattern: Set<Set<Int>> = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
@@ -117,7 +129,7 @@ final class GameViewModel: ObservableObject {
         return movePosition
     }
     
-    func checkWinCondition(for player: Player, in move: [Move?]) -> Bool {
+    private func checkWinCondition(for player: Player, in move: [Move?]) -> Bool {
         let winPattern: Set<Set<Int>> = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
         //First remove all nils -> then chain a filter the current player's moves
         let playerMoves = moves.compactMap { $0 }.filter{$0.player == player}
@@ -130,12 +142,18 @@ final class GameViewModel: ObservableObject {
         return false
     }
     
-    func checkForDraw(in moves: [Move?]) -> Bool {
+    private func checkForDraw(in moves: [Move?]) -> Bool {
         //CompactMap will remove the nils to check the count of moves, if = 9 then thats the max and is a drawn
         return moves.compactMap{ $0 }.count == 9
     }
     
-    func resetGame() {
-        moves =  Array(repeating: nil, count: 9)
+    private func increaseCounter(for player: Player) {
+        if player == .computer{
+            scores.computer += 1
+            computerScore = "\(scores.computer)"
+        }else if player == .human{
+            scores.human += 1
+            humanScore = "\(scores.human)"
+        }
     }
 }

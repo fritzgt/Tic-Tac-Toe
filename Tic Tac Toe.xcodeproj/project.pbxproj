@@ -58,11 +58,11 @@
 			children = (
 				040D1B03264BA4C4004245CF /* Tic_Tac_ToeApp.swift */,
 				040D1B05264BA4C4004245CF /* GameView.swift */,
+				043FCB352653887A00E51EB8 /* GameViewModel.swift */,
 				043FCB322652627200E51EB8 /* Alerts.swift */,
 				040D1B07264BA4C8004245CF /* Assets.xcassets */,
 				040D1B0C264BA4C8004245CF /* Info.plist */,
 				040D1B09264BA4C8004245CF /* Preview Content */,
-				043FCB352653887A00E51EB8 /* GameViewModel.swift */,
 			);
 			path = "Tic Tac Toe";
 			sourceTree = "<group>";
