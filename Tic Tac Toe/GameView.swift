@@ -49,7 +49,7 @@ struct GameView: View {
             .alert(item: $viewModel.alertItem, content: { alertItem in
                 Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { viewModel.resetGame() }))
             })
-            
+            //Place Google ads here
             VStack{
                 Spacer()
                 Picker(selection: $viewModel.difficultyLevel, label: Text("Pick Level")) {
@@ -64,10 +64,13 @@ struct GameView: View {
     }
 }
 
+// MARK: - Player
 enum Player {
     case human, computer
 }
 
+
+// MARK: - Move
 struct Move {
     let player: Player
     let boardIndex: Int
@@ -77,12 +80,7 @@ struct Move {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView()
-    }
-}
-
+// MARK: - GameSquareView
 struct GameSquareView: View {
     var proxy: GeometryProxy
     var body: some View {
@@ -93,6 +91,7 @@ struct GameSquareView: View {
     }
 }
 
+// MARK: - PlayerIndicator
 struct PlayerIndicator: View {
     var systemImageName: String
     var body: some View {
@@ -102,3 +101,15 @@ struct PlayerIndicator: View {
             .foregroundColor(.white)
     }
 }
+
+
+// MARK: - ContentView_Previews
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameView()
+    }
+}
+
+
+
+
