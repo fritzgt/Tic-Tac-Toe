@@ -1,87 +1,60 @@
 //
-//  ContentView.swift
+//  GameViewModel.swift
 //  Tic Tac Toe
 //
-//  Created by FGT MAC on 5/12/21.
+//  Created by FGT MAC on 5/18/21.
 //
 
 import SwiftUI
 
-
-struct GameView: View {
+//Final is use to prevent other classes from inheriting from this one
+//ObservableObject To manage state
+final class GameViewModel: ObservableObject {
     
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @State private var moves: [Move?] = Array(repeating: nil, count: 9)
-    @State private var isGameboardDisable = false
-    @State private var alertItem: AlertItem?
+    @Published var moves: [Move?] = Array(repeating: nil, count: 9)
+    @Published var isGameboardDisable = false
+    @Published var alertItem: AlertItem?
+    
+    func processPlayerMove(for position: Int) {
+        //Prevents user from overwriting an occupied space
+        if isSquareOccupied(in: moves, forIndex: position){ return }
         
-    var body: some View {
-        GeometryReader { geometry in
-            VStack{
-                Spacer()
-                LazyVGrid(columns: columns, spacing: 5) {
-                    ForEach(0..<9) { i in
-                        ZStack{
-                            Circle()
-                                .foregroundColor(.blue).opacity(0.5)
-                                .frame(width: geometry.size.width/3 - 15,
-                                       height: geometry.size.width/3 - 15)
-                            Image(systemName: moves[i]?.indicator ?? "")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.white)
-                        }
-                        .onTapGesture {
-                            //Prevents user from overwriting an occupied space
-                            if isSquareOccupied(in: moves, forIndex: i){ return }
-                            
-                            //1.User move
-                            moves[i] = Move(player: .human, boardIndex: i)
-                            
-                            //Check for win conditions
-                            if checkWinCondition(for: .human, in: moves){
-                                alertItem =  AletContext.humanWin
-                                return
-                            }
-                            if checkForDraw(in: moves){
-                                alertItem =  AletContext.draw
-                                return
-                            }
-                            
-                            isGameboardDisable = true//Prevents user from tapping another space before the computer makes a move
-                            
-                            //2.After a half sec delay computer will make a move
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                let computerPosition = determineComputerMovePosition(in: moves)
-                                moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
-                                
-                                isGameboardDisable = false
-                                //Check for win conditions
-                                if checkWinCondition(for: .computer, in: moves){
-                                    alertItem =  AletContext.computerWin
-                                    return
-                                }
-                                
-                                if checkForDraw(in: moves){
-                                    alertItem =  AletContext.draw
-                                    return
-                                }
-                                
-                            }
-                            
-                        }
-                    }
-                }
-                Spacer()
+        //1.User move
+        moves[position] = Move(player: .human, boardIndex: position)
+        
+        //Check for win conditions
+        if checkWinCondition(for: .human, in: moves){
+            alertItem =  AletContext.humanWin
+            return
+        }
+        if checkForDraw(in: moves){
+            alertItem =  AletContext.draw
+            return
+        }
+        
+        isGameboardDisable = true//Prevents user from tapping another space before the computer makes a move
+        
+        //2.After a half sec delay computer will make a move
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            let computerPosition = determineComputerMovePosition(in: moves)
+            moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
+            
+            isGameboardDisable = false
+            //Check for win conditions
+            if checkWinCondition(for: .computer, in: moves){
+                alertItem =  AletContext.computerWin
+                return
             }
-            .disabled(isGameboardDisable)
-            .padding()
-            .alert(item: $alertItem, content: { alertItem in
-                Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { resetGame() }))
-            })
+            
+            if checkForDraw(in: moves){
+                alertItem =  AletContext.draw
+                return
+            }
+            
         }
     }
     
@@ -89,7 +62,6 @@ struct GameView: View {
         return moves.contains(where: {$0?.boardIndex == index})
     }
     
-   
     func determineComputerMovePosition(in moves: [Move?]) -> Int {
         //If AI can win, then win
         //1.Posible win positions
@@ -165,24 +137,5 @@ struct GameView: View {
     
     func resetGame() {
         moves =  Array(repeating: nil, count: 9)
-    }
-}
-
-enum Player {
-    case human, computer
-}
-
-struct Move {
-    let player: Player
-    let boardIndex: Int
-    
-    var indicator: String{
-        return player == .human ? "xmark" : "circle"
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView()
     }
 }
