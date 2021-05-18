@@ -131,8 +131,8 @@ struct ContentView: View {
         }
         
         //If AI cant block, then take middle square
-        let isMiddlePositionAvailable = !isSquareOccupied(in: moves, forIndex: 4)
-        if isMiddlePositionAvailable { return 4 }
+        let centerSquare = 4
+        if !isSquareOccupied(in: moves, forIndex: centerSquare) { return centerSquare }
         
         //If AI can't take middle square, then random available square
         var movePosition = Int.random(in: 0..<9)
