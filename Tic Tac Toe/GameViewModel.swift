@@ -21,7 +21,8 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var humanScore: String = "0"
     @Published var computerScore: String = "0"
-    var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    @Published var difficultyLevel: Int = 0
+    private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
     
     // MARK: - Methods
     func processPlayerMove(for position: Int) {

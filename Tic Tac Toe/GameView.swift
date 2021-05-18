@@ -49,6 +49,17 @@ struct GameView: View {
             .alert(item: $viewModel.alertItem, content: { alertItem in
                 Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { viewModel.resetGame() }))
             })
+            
+            VStack{
+                Spacer()
+                Picker(selection: $viewModel.difficultyLevel, label: Text("Pick Level")) {
+                    Text("Easy").tag(1)
+                    Text("Mid").tag(2)
+                    Text("Hard").tag(3)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+            }
+            
         }
     }
 }
