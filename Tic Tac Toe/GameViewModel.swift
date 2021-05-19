@@ -71,7 +71,11 @@ final class GameViewModel: ObservableObject {
         
         //Check for win conditions
         if checkWinCondition(for: player, in: moves){
-            alertItem =  AlertContext.humanWin
+            if player == .player1 {
+                alertItem =  AlertContext.player1
+            }else{
+                alertItem =  AlertContext.player2
+            }
             increaseCounter(for: player)
             return
         }
@@ -96,7 +100,7 @@ final class GameViewModel: ObservableObject {
             isGameboardDisable = false
             //Check for win conditions
             if checkWinCondition(for: .computer, in: moves){
-                alertItem =  AlertContext.computerWin
+                alertItem =  AlertContext.computer
                 increaseCounter(for: .computer)
                 return
             }
