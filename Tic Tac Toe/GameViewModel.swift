@@ -21,28 +21,58 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var humanScore: String = "0"
     @Published var computerScore: String = "0"
-    @Published var difficultyLevel: Int = 1 {
+    @Published var circleColor: Color = .green
+    @Published var playingMode: Int = 0 {
+        didSet{
+            resetCounter()
+            resetGame()
+            player1Turn = true // This preven bug where if user switch from 2player to AI the player2 might be active
+        }
+    }
+    @Published var difficultyLevel: Int = 0 {
         didSet{
             //If user changes the difficulty level reset game
             resetCounter()
             resetGame()
+            updateColor()
         }
     }
+    private var player1Turn: Bool = true
+    private var colors: [Color] = [.green, .yellow, .red]
     private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    
     
     // MARK: - Methods
     func processPlayerMove(for position: Int) {
+        
+        if player1Turn{
+            playerMove(for: position, player: .player1)
+            if playingMode == 1 {
+                player1Turn.toggle()
+            }
+        }else{
+            playerMove(for: position, player: .player2)
+            player1Turn.toggle()
+        }
+    }
+    
+    func resetGame() {
+        moves =  Array(repeating: nil, count: 9)
+    }
+    
+    // MARK: - Private Methods
+    private func playerMove(for position: Int, player: Player) {
         //Prevents user from overwriting an occupied space
         if isSquareOccupied(in: moves, forIndex: position){ return }
         
         //1.User move
         
-        moves[position] = Move(player: .human, boardIndex: position)
+        moves[position] = Move(player: player, boardIndex: position)
         
         //Check for win conditions
-        if checkWinCondition(for: .human, in: moves){
+        if checkWinCondition(for: player, in: moves){
             alertItem =  AlertContext.humanWin
-            increaseCounter(for: .human)
+            increaseCounter(for: player)
             return
         }
         if checkForDraw(in: moves){
@@ -50,8 +80,14 @@ final class GameViewModel: ObservableObject {
             return
         }
         
-        isGameboardDisable = true//Prevents user from tapping another space before the computer makes a move
-        
+        if playingMode == 0 {
+            computerMove(for: position)
+
+        }
+    }
+    
+    private func computerMove(for position: Int) {
+        isGameboardDisable = true
         //2.After a half sec delay computer will make a move
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
             let computerPosition = determineComputerMovePosition(in: moves)
@@ -73,11 +109,6 @@ final class GameViewModel: ObservableObject {
         }
     }
     
-    func resetGame() {
-        moves =  Array(repeating: nil, count: 9)
-    }
-    
-    // MARK: - Private Methods
     private func isSquareOccupied(in moves: [Move?], forIndex index: Int) -> Bool {
         return moves.contains(where: {$0?.boardIndex == index})
     }
@@ -87,7 +118,7 @@ final class GameViewModel: ObservableObject {
         //If AI can win, then win
         //1.Posible win positions
         let winPattern: Set<Set<Int>> = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-        if difficultyLevel == 3 {
+        if difficultyLevel == 2 {
             //2.Remove nils from all positions and then filter to get only computer positions
             let computerMoves = moves.compactMap { $0 }.filter{$0.player == .computer}
             //3.Get all the indexes of the computer positions
@@ -105,11 +136,11 @@ final class GameViewModel: ObservableObject {
                 }
             }
         }
-        if difficultyLevel >= 2 {
+        if difficultyLevel >= 1 {
             //If AI can't win, then block(Similar to above but this time we check for human moves to block
             
             //1.Remove nils from all positions and then filter to get only computer positions
-            let humanMoves = moves.compactMap { $0 }.filter{$0.player == .human}
+            let humanMoves = moves.compactMap { $0 }.filter{$0.player == .player1}
             //2.Get all the indexes of the human positions
             let humanPositions = Set(humanMoves.map {$0.boardIndex})
             //3.Iterate over the posible win positions
@@ -161,12 +192,12 @@ final class GameViewModel: ObservableObject {
     }
     
     private func increaseCounter(for player: Player) {
-        if player == .computer{
-            scores.computer += 1
-            computerScore = "\(scores.computer)"
-        }else if player == .human{
+        if player == .player1 {
             scores.human += 1
             humanScore = "\(scores.human)"
+        }else{
+            scores.computer += 1
+            computerScore = "\(scores.computer)"
         }
     }
     
@@ -175,6 +206,10 @@ final class GameViewModel: ObservableObject {
         scores.human = 0
         humanScore = "0"
         computerScore = "0"
+    }
+    
+    private func updateColor(){
+        circleColor = colors[difficultyLevel]
     }
     
 }
