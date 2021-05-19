@@ -16,8 +16,8 @@ struct GameView: View {
             Spacer()
             VStack{
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
-                    Text("A.I Mode").tag(0)
-                    Text("2 Players Mode").tag(1)
+                    Text("Single  Mode").tag(0)
+                    Text("Multi players Mode").tag(1)
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -25,7 +25,7 @@ struct GameView: View {
             HStack{
                 
                 Spacer()
-                Text("Player 1")
+                Text(viewModel.playingMode == 0 ? "Me" : "Player 1")
                     .font(.system(size: 25, weight: .light, design: .default))
                 Spacer()
                 Text(viewModel.humanScore)
@@ -71,6 +71,12 @@ struct GameView: View {
             }
             
         }
+        .background(
+        Image("wallpaper2")
+            .resizable()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        )
     }
 }
 
@@ -97,7 +103,7 @@ struct GameSquareView: View {
     var color: Color
     var body: some View {
         Circle()
-            .foregroundColor(color)
+            .foregroundColor(color).opacity(0.3)
             .frame(width: proxy.size.width/3 - 15,
                    height: proxy.size.width/3 - 15)
     }

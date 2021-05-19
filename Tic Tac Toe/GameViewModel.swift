@@ -21,7 +21,7 @@ final class GameViewModel: ObservableObject {
     @Published var alertItem: AlertItem?
     @Published var humanScore: String = "0"
     @Published var computerScore: String = "0"
-    @Published var circleColor: Color = .green
+    @Published var circleColor: Color = .blue
     @Published var playingMode: Int = 0 {
         didSet{
             resetCounter()
@@ -38,7 +38,7 @@ final class GameViewModel: ObservableObject {
         }
     }
     private var player1Turn: Bool = true
-    private var colors: [Color] = [.green, .yellow, .red]
+    private var colors: [Color] = [.blue, .purple, .red]
     private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
     
     
