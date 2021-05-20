@@ -11,9 +11,14 @@
 		040D1B06264BA4C4004245CF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D1B05264BA4C4004245CF /* GameView.swift */; };
 		040D1B08264BA4C8004245CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040D1B07264BA4C8004245CF /* Assets.xcassets */; };
 		040D1B0B264BA4C8004245CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040D1B0A264BA4C8004245CF /* Preview Assets.xcassets */; };
+		0426876426565B450029651F /* player1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876326565B450029651F /* player1.wav */; };
+		0426876926565BA30029651F /* player2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876826565BA30029651F /* player2.wav */; };
+		0426876C26565BAA0029651F /* winner.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876B26565BAA0029651F /* winner.wav */; };
+		0426876F2656643F0029651F /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876E2656643F0029651F /* lose.wav */; };
 		043FCB332652627200E51EB8 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB322652627200E51EB8 /* Alerts.swift */; };
 		043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB352653887A00E51EB8 /* GameViewModel.swift */; };
-		04B5ED0426565118009220C3 /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0326565118009220C3 /* TicTacToeModel.swift */; };
+		04B5ED0426565118009220C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0326565118009220C3 /* GameModel.swift */; };
+		04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,9 +28,14 @@
 		040D1B07264BA4C8004245CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		040D1B0A264BA4C8004245CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		040D1B0C264BA4C8004245CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0426876326565B450029651F /* player1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player1.wav; sourceTree = "<group>"; };
+		0426876826565BA30029651F /* player2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player2.wav; sourceTree = "<group>"; };
+		0426876B26565BAA0029651F /* winner.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = winner.wav; sourceTree = "<group>"; };
+		0426876E2656643F0029651F /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		043FCB322652627200E51EB8 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		043FCB352653887A00E51EB8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
-		04B5ED0326565118009220C3 /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
+		04B5ED0326565118009220C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,8 @@
 				04B5ED01265650E9009220C3 /* Views */,
 				04B5ED02265650F3009220C3 /* View Model */,
 				04B5ED062656511F009220C3 /* Model */,
+				04B5ED0F26565474009220C3 /* Helpers */,
+				0426876626565B4D0029651F /* Sounds */,
 				040D1B07264BA4C8004245CF /* Assets.xcassets */,
 				040D1B0C264BA4C8004245CF /* Info.plist */,
 				040D1B09264BA4C8004245CF /* Preview Content */,
@@ -75,6 +87,17 @@
 				040D1B0A264BA4C8004245CF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0426876626565B4D0029651F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0426876326565B450029651F /* player1.wav */,
+				0426876B26565BAA0029651F /* winner.wav */,
+				0426876E2656643F0029651F /* lose.wav */,
+				0426876826565BA30029651F /* player2.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		04B5ED01265650E9009220C3 /* Views */ = {
@@ -96,10 +119,18 @@
 		04B5ED062656511F009220C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04B5ED0326565118009220C3 /* TicTacToeModel.swift */,
+				04B5ED0326565118009220C3 /* GameModel.swift */,
 				043FCB322652627200E51EB8 /* Alerts.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		04B5ED0F26565474009220C3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,7 +190,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0426876426565B450029651F /* player1.wav in Resources */,
+				0426876F2656643F0029651F /* lose.wav in Resources */,
 				040D1B0B264BA4C8004245CF /* Preview Assets.xcassets in Resources */,
+				0426876C26565BAA0029651F /* winner.wav in Resources */,
+				0426876926565BA30029651F /* player2.wav in Resources */,
 				040D1B08264BA4C8004245CF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,7 +209,8 @@
 				043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */,
 				040D1B06264BA4C4004245CF /* GameView.swift in Sources */,
 				043FCB332652627200E51EB8 /* Alerts.swift in Sources */,
-				04B5ED0426565118009220C3 /* TicTacToeModel.swift in Sources */,
+				04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */,
+				04B5ED0426565118009220C3 /* GameModel.swift in Sources */,
 				040D1B04264BA4C4004245CF /* Tic_Tac_ToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

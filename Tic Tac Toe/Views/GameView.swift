@@ -16,28 +16,36 @@ struct GameView: View {
             Spacer()
             VStack{
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
-                    Text("Single  Mode").tag(0)
-                    Text("Multi players Mode").tag(1)
+                    Text("Single Mode").tag(0)
+                    Text("Multi Players Mode").tag(1)
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
-            
-            HStack{
+                HStack{
+                    
+                    Spacer()
+                    Text(viewModel.playingMode == 0 ? "Me" : "Player 1")
+                        .font(.system(size: 25, weight: .light, design: .default))
+                    Spacer()
+                    Text(viewModel.humanScore)
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                    Text("-")
+                    Text(viewModel.computerScore)
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                    Spacer()
+                    Text(viewModel.playingMode == 0 ? "A.I" : "Player 2")
+                        .font(.system(size: 25, weight: .light, design: .default))
+                    Spacer()
+                }
+                Button {
+                    viewModel.isSoundEnable.toggle()
+                } label: {
+                    Image(systemName: viewModel.isSoundEnable ? "speaker.wave.3" : "speaker.slash")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.white)
+                }
                 
-                Spacer()
-                Text(viewModel.playingMode == 0 ? "Me" : "Player 1")
-                    .font(.system(size: 25, weight: .light, design: .default))
-                Spacer()
-                Text(viewModel.humanScore)
-                    .font(.system(size: 25, weight: .bold, design: .default))
-                Text("-")
-                Text(viewModel.computerScore)
-                    .font(.system(size: 25, weight: .bold, design: .default))
-                Spacer()
-                Text(viewModel.playingMode == 0 ? "A.I" : "Player 2")
-                    .font(.system(size: 25, weight: .light, design: .default))
-                Spacer()
-            }
             }
             VStack{
                 Spacer()
@@ -66,16 +74,17 @@ struct GameView: View {
                     Text("Easy").tag(0)
                     Text("Mid").tag(1)
                     Text("Hard").tag(2)
+                    //                    Text("Auto").tag(3) //TODO: Use to automatically increse level after 5-10 turns without reseting counter (Logic Not created yet)
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
             
         }
         .background(
-        Image("wallpaper2")
-            .resizable()
-                        .edgesIgnoringSafeArea(.all)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            Image("wallpaper2")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         )
     }
 }
@@ -106,7 +115,7 @@ struct PlayerIndicator: View {
             .frame(width: 40, height: 40)
             .foregroundColor(.white)
             .rotationEffect(.degrees(viewModel.moves[index] == nil ? 0 : 180))
-             .animation(.default)
+            .animation(.default)
     }
 }
 

@@ -16,6 +16,13 @@ final class GameViewModel: ObservableObject {
                                GridItem(.flexible()),
                                GridItem(.flexible())]
     
+    // MARK: - Private Properties
+    private var soundPlayer = SoundsPlayer()
+    private var player1Turn: Bool = true
+    private var colors: [Color] = [.blue, .purple, .red]
+    private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    
+    // MARK: - Published Properties
     @Published var moves: [Move?] = Array(repeating: nil, count: 9)
     @Published var isGameboardDisable = false
     @Published var alertItem: AlertItem?
@@ -37,9 +44,8 @@ final class GameViewModel: ObservableObject {
             updateColor()
         }
     }
-    private var player1Turn: Bool = true
-    private var colors: [Color] = [.blue, .purple, .red]
-    private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    @Published var isSoundEnable: Bool = true
+
     
     
     // MARK: - Methods
@@ -47,12 +53,14 @@ final class GameViewModel: ObservableObject {
         
         if player1Turn{
             playerMove(for: position, player: .player1)
+            soundPlayer.playSound(sound: "player1", type: "wav", isSoundEnable: isSoundEnable)
             if playingMode == 1 {
                 player1Turn.toggle()
             }
         }else{
             playerMove(for: position, player: .player2)
             player1Turn.toggle()
+            soundPlayer.playSound(sound: "player2", type: "wav", isSoundEnable: isSoundEnable)
         }
     }
     
@@ -77,20 +85,28 @@ final class GameViewModel: ObservableObject {
                 alertItem =  AlertContext.player2
             }
             increaseCounter(for: player)
+            
+            DispatchQueue.main.async { [self] in
+                self.soundPlayer.playSound(sound: "winner", type: "wav", isSoundEnable: isSoundEnable)
+            }
             return
         }
+        
         if checkForDraw(in: moves){
             alertItem =  AlertContext.draw
+            DispatchQueue.main.async { [self] in
+                self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
+            }
             return
         }
         
         if playingMode == 0 {
             computerMove(for: position)
-
         }
     }
     
     private func computerMove(for position: Int) {
+        
         isGameboardDisable = true
         //2.After a half sec delay computer will make a move
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
@@ -102,14 +118,16 @@ final class GameViewModel: ObservableObject {
             if checkWinCondition(for: .computer, in: moves){
                 alertItem =  AlertContext.computer
                 increaseCounter(for: .computer)
+                self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
                 return
             }
             
             if checkForDraw(in: moves){
                 alertItem =  AlertContext.draw
+                self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
                 return
             }
-            
+            soundPlayer.playSound(sound: "player2", type: "wav", isSoundEnable: isSoundEnable)
         }
     }
     
