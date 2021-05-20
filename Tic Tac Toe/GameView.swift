@@ -42,13 +42,13 @@ struct GameView: View {
             VStack{
                 Spacer()
                 LazyVGrid(columns: viewModel.columns, spacing: 5) {
-                    ForEach(0..<9) { i in
+                    ForEach(0..<9) { index in
                         ZStack{
-                            GameSquareView(proxy: geometry, color: viewModel.circleColor)
-                            PlayerIndicator(systemImageName: viewModel.moves[i]?.indicator ?? "")
+                            GameSquareView(proxy: geometry, viewModel: viewModel, index: index)
+                            PlayerIndicator(systemImageName: viewModel.moves[index]?.indicator ?? "", viewModel: viewModel, index: index)
                         }
                         .onTapGesture {
-                            viewModel.processPlayerMove(for:i)
+                            viewModel.processPlayerMove(for: index)
                         }
                     }
                 }
@@ -100,23 +100,30 @@ struct Move {
 // MARK: - GameSquareView
 struct GameSquareView: View {
     var proxy: GeometryProxy
-    var color: Color
+    var viewModel: GameViewModel
+    var index: Int
     var body: some View {
         Circle()
-            .foregroundColor(color).opacity(0.3)
+            .foregroundColor(viewModel.circleColor).opacity(0.3)
             .frame(width: proxy.size.width/3 - 15,
                    height: proxy.size.width/3 - 15)
+            .scaleEffect(viewModel.moves[index] == nil ? 1.0 : 0.2)
+            .animation(.default)
     }
 }
 
 // MARK: - PlayerIndicator
 struct PlayerIndicator: View {
     var systemImageName: String
+    var viewModel: GameViewModel
+    var index: Int
     var body: some View {
         Image(systemName: systemImageName)
             .resizable()
             .frame(width: 40, height: 40)
             .foregroundColor(.white)
+            .rotationEffect(.degrees(viewModel.moves[index] == nil ? 0 : 180))
+             .animation(.default)
     }
 }
 
