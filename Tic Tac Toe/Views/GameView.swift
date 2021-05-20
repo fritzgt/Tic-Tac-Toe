@@ -80,23 +80,6 @@ struct GameView: View {
     }
 }
 
-// MARK: - Player
-enum Player {
-    case player1, computer, player2
-}
-
-
-// MARK: - Move
-struct Move {
-    let player: Player
-    let boardIndex: Int
-    
-    var indicator: String{
-        //If is player 1 = X computer or player 2 = O
-        return player == .player1 ? "xmark" : "circle"
-    }
-}
-
 // MARK: - GameSquareView
 struct GameSquareView: View {
     var proxy: GeometryProxy
