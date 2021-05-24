@@ -21,6 +21,7 @@ final class GameViewModel: ObservableObject {
     private var player1Turn: Bool = true
     private var colors: [Color] = [.blue, .purple, .red]
     private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    private var haptics = UINotificationFeedbackGenerator()
     
     // MARK: - Published Properties
     @Published var moves: [Move?] = Array(repeating: nil, count: 9)
@@ -54,6 +55,7 @@ final class GameViewModel: ObservableObject {
         if player1Turn{
             playerMove(for: position, player: .player1)
             soundPlayer.playSound(sound: "player1", type: "wav", isSoundEnable: isSoundEnable)
+            haptics.notificationOccurred(.success)
             if playingMode == 1 {
                 player1Turn.toggle()
             }
@@ -61,6 +63,7 @@ final class GameViewModel: ObservableObject {
             playerMove(for: position, player: .player2)
             player1Turn.toggle()
             soundPlayer.playSound(sound: "player2", type: "wav", isSoundEnable: isSoundEnable)
+            haptics.notificationOccurred(.success)
         }
     }
     
@@ -88,6 +91,7 @@ final class GameViewModel: ObservableObject {
             
             DispatchQueue.main.async { [self] in
                 self.soundPlayer.playSound(sound: "winner", type: "wav", isSoundEnable: isSoundEnable)
+                haptics.notificationOccurred(.success)
             }
             return
         }
@@ -96,6 +100,7 @@ final class GameViewModel: ObservableObject {
             alertItem =  AlertContext.draw
             DispatchQueue.main.async { [self] in
                 self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
+                haptics.notificationOccurred(.warning)
             }
             return
         }
@@ -119,15 +124,18 @@ final class GameViewModel: ObservableObject {
                 alertItem =  AlertContext.computer
                 increaseCounter(for: .computer)
                 self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
+                haptics.notificationOccurred(.warning)
                 return
             }
             
             if checkForDraw(in: moves){
                 alertItem =  AlertContext.draw
                 self.soundPlayer.playSound(sound: "lose", type: "wav", isSoundEnable: isSoundEnable)
+                haptics.notificationOccurred(.warning)
                 return
             }
             soundPlayer.playSound(sound: "player2", type: "wav", isSoundEnable: isSoundEnable)
+            haptics.notificationOccurred(.success)
         }
     }
     
