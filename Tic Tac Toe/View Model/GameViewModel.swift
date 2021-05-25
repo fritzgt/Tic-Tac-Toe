@@ -51,6 +51,7 @@ final class GameViewModel: ObservableObject {
     
     // MARK: - Methods
     func processPlayerMove(for position: Int) {
+        if isSquareOccupied(in: moves, forIndex: position){ return }
         
         if player1Turn{
             playerMove(for: position, player: .player1)
@@ -73,9 +74,6 @@ final class GameViewModel: ObservableObject {
     
     // MARK: - Private Methods
     private func playerMove(for position: Int, player: Player) {
-        //Prevents user from overwriting an occupied space
-        if isSquareOccupied(in: moves, forIndex: position){ return }
-        
         //1.User move
         
         moves[position] = Move(player: player, boardIndex: position)

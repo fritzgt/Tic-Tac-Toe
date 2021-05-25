@@ -81,7 +81,7 @@ struct GameView: View {
             
         }
         .background(
-            Image("wallpaper2")
+            Image("wallpaper3")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
