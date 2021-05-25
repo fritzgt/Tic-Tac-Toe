@@ -16,27 +16,35 @@ struct GameView: View {
             Spacer()
             VStack{
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
-                    Text("Single Mode").tag(0)
-                    Text("Multi Players Mode").tag(1)
+                    Image(systemName: "person.fill").tag(0)
+                    Image(systemName: "person.2.fill").tag(1)
                     
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                HStack{
+                HStack(spacing: 15){
+                    HStack{
+                        VStack{
+                            Text(viewModel.playingMode == 0 ? "Me" : "Player 1").fontWeight(.bold)
+                            Text(viewModel.humanScore).fontWeight(.bold).font(.system(size: 22))
+                        }.padding()
+                        .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
+                        .background(Color.blue)
+                        .cornerRadius(15)
+                    }
+                    Spacer(minLength: 0)
                     
-                    Spacer()
-                    Text(viewModel.playingMode == 0 ? "Me" : "Player 1")
-                        .font(.system(size: 25, weight: .light, design: .default))
-                    Spacer()
-                    Text(viewModel.humanScore)
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                    Text("-")
-                    Text(viewModel.computerScore)
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                    Spacer()
-                    Text(viewModel.playingMode == 0 ? "A.I" : "Player 2")
-                        .font(.system(size: 25, weight: .light, design: .default))
-                    Spacer()
+                    HStack{
+                        VStack{
+                            Text(viewModel.playingMode == 0 ? "A.I" : "Player 2").fontWeight(.bold)
+                            Text(viewModel.computerScore).fontWeight(.bold).font(.system(size: 22))
+                        }.padding()
+                        .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
+                        .background(Color.pink)
+                        .cornerRadius(15)
+                    }
                 }
+                Spacer(minLength: 0)
+                
                 Button {
                     viewModel.isSoundEnable.toggle()
                 } label: {

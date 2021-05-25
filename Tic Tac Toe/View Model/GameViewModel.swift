@@ -75,7 +75,6 @@ final class GameViewModel: ObservableObject {
     // MARK: - Private Methods
     private func playerMove(for position: Int, player: Player) {
         //1.User move
-        
         moves[position] = Move(player: player, boardIndex: position)
         
         //Check for win conditions
