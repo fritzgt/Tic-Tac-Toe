@@ -13,37 +13,52 @@ struct GameView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Spacer()
+            
             VStack{
+                
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
+                    Spacer()
                     Image(systemName: "person.fill").tag(0)
                     Image(systemName: "person.2.fill").tag(1)
-                    
+                    Spacer()
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                
                 HStack(spacing: 15){
                     HStack{
                         VStack{
-                            Text(viewModel.playingMode == 0 ? "Me" : "Player 1").fontWeight(.bold)
-                            Text(viewModel.humanScore).fontWeight(.bold).font(.system(size: 22))
-                        }.padding()
+                            Text(viewModel.playingMode == 0 ? "Me" : "Player 1")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            Text(viewModel.humanScore).fontWeight(.bold)
+                                .font(.system(size: 22))
+                                .foregroundColor(.white)
+                        }
+                        .padding()
                         .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
                         .background(Color.blue)
+                        .opacity(0.8)
                         .cornerRadius(15)
                     }
                     Spacer(minLength: 0)
                     
                     HStack{
                         VStack{
-                            Text(viewModel.playingMode == 0 ? "A.I" : "Player 2").fontWeight(.bold)
-                            Text(viewModel.computerScore).fontWeight(.bold).font(.system(size: 22))
-                        }.padding()
+                            Text(viewModel.playingMode == 0 ? "A.I" : "Player 2")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            Text(viewModel.computerScore).fontWeight(.bold)
+                                .font(.system(size: 22))
+                                .foregroundColor(.white)
+                        }
+                        .padding()
                         .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
                         .background(Color.pink)
+                        .opacity(0.8)
                         .cornerRadius(15)
                     }
                 }
-                Spacer(minLength: 0)
+                
                 
                 Button {
                     viewModel.isSoundEnable.toggle()
@@ -53,8 +68,11 @@ struct GameView: View {
                         .frame(width: 30, height: 30)
                         .foregroundColor(.white)
                 }
-                
+                Spacer()
             }
+            
+            
+            
             VStack{
                 Spacer()
                 LazyVGrid(columns: viewModel.columns, spacing: 5) {
@@ -78,11 +96,11 @@ struct GameView: View {
             //Place Google ads here
             VStack{
                 Spacer()
-                Picker(selection: $viewModel.difficultyLevel, label: Text("Pick Level")) {
-                    Text("Easy").tag(0)
-                    Text("Mid").tag(1)
-                    Text("Hard").tag(2)
-                    //                    Text("Auto").tag(3) //TODO: Use to automatically increse level after 5-10 turns without reseting counter (Logic Not created yet)
+                Picker(selection: $viewModel.selectedDifficultyLevel, label: Text("Pick Level")) {
+                    Text("Auto").tag(0)
+                    Text("I").tag(1)
+                    Text("II").tag(2)
+                    Text("III").tag(3)
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }

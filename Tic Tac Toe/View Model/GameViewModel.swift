@@ -21,6 +21,7 @@ final class GameViewModel: ObservableObject {
     private var player1Turn: Bool = true
     private var colors: [Color] = [.blue, .purple, .red]
     private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
+    private var difficultyLevel: Int = 0
     private var haptics = UINotificationFeedbackGenerator()
     
     // MARK: - Published Properties
@@ -37,16 +38,21 @@ final class GameViewModel: ObservableObject {
             player1Turn = true // This preven bug where if user switch from 2player to AI the player2 might be active
         }
     }
-    @Published var difficultyLevel: Int = 0 {
+    @Published var selectedDifficultyLevel: Int = 0 {
         didSet{
-            //If user changes the difficulty level reset game
-            resetCounter()
-            resetGame()
-            updateColor()
+            if selectedDifficultyLevel == 0 {
+                setAutoDifficulty()
+            }else{
+                //If user changes the difficulty level reset game
+                difficultyLevel = selectedDifficultyLevel - 1
+                resetCounter()
+                resetGame()
+                updateColor()
+            }
         }
     }
     @Published var isSoundEnable: Bool = true
-
+    
     
     
     // MARK: - Methods
@@ -73,6 +79,20 @@ final class GameViewModel: ObservableObject {
     }
     
     // MARK: - Private Methods
+    private func setAutoDifficulty() {
+        switch scores.human {
+        case 5..<10:
+            difficultyLevel = 1
+            updateColor()
+        case 10 ..< 1000:
+            difficultyLevel = 2
+            updateColor()
+        default:
+            difficultyLevel = 0
+            updateColor()
+        }
+    }
+    
     private func playerMove(for position: Int, player: Player) {
         //1.User move
         moves[position] = Move(player: player, boardIndex: position)
@@ -225,6 +245,10 @@ final class GameViewModel: ObservableObject {
         }else{
             scores.computer += 1
             computerScore = "\(scores.computer)"
+        }
+        
+        if selectedDifficultyLevel == 0 {//If difficulty level is set to auto
+            setAutoDifficulty()
         }
     }
     
