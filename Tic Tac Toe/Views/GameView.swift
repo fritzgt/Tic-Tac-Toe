@@ -17,10 +17,10 @@ struct GameView: View {
             VStack{
                 
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
-                    Spacer()
+//                    Spacer()
                     Image(systemName: "person.fill").tag(0)
                     Image(systemName: "person.2.fill").tag(1)
-                    Spacer()
+//                    Spacer()
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 
@@ -37,7 +37,7 @@ struct GameView: View {
                         .padding()
                         .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
                         .background(Color.blue)
-                        .opacity(0.8)
+                        .opacity(0.9)
                         .cornerRadius(15)
                     }
                     Spacer(minLength: 0)
@@ -54,7 +54,7 @@ struct GameView: View {
                         .padding()
                         .frame(width: (UIScreen.main.bounds.width - 45 ) / 2)
                         .background(Color.pink)
-                        .opacity(0.8)
+                        .opacity(0.9)
                         .cornerRadius(15)
                     }
                 }
@@ -98,11 +98,13 @@ struct GameView: View {
                 Spacer()
                 Picker(selection: $viewModel.selectedDifficultyLevel, label: Text("Pick Level")) {
                     Text("Auto").tag(0)
-                    Text("I").tag(1)
-                    Text("II").tag(2)
-                    Text("III").tag(3)
+                    Text("Easy").tag(1)
+                    Text("Mid").tag(2)
+                    Text("Advance").tag(3)
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                .disabled(viewModel.playingMode == 1)
+               
             }
             
         }
@@ -122,7 +124,7 @@ struct GameSquareView: View {
     var index: Int
     var body: some View {
         Circle()
-            .foregroundColor(viewModel.circleColor).opacity(0.3)
+            .foregroundColor(viewModel.circleColor).opacity(0.4)
             .frame(width: proxy.size.width/3 - 15,
                    height: proxy.size.width/3 - 15)
             .scaleEffect(viewModel.moves[index] == nil ? 1.0 : 0.2)

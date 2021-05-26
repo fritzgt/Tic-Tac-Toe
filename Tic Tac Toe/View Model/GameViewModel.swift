@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum DificultyLevel: String, CaseIterable {
+    case auto, easy, mid, high
+}
+
 //Final is use to prevent other classes from inheriting from this one
 //ObservableObject To manage state
 final class GameViewModel: ObservableObject {
@@ -21,7 +25,7 @@ final class GameViewModel: ObservableObject {
     private var player1Turn: Bool = true
     private var colors: [Color] = [.blue, .purple, .red]
     private var scores: (human: Int, computer: Int) =  (human: 0, computer: 0)
-    private var difficultyLevel: Int = 0
+    private var difficultyLevel: DificultyLevel = DificultyLevel.allCases[0]
     private var haptics = UINotificationFeedbackGenerator()
     
     // MARK: - Published Properties
@@ -44,7 +48,7 @@ final class GameViewModel: ObservableObject {
                 setAutoDifficulty()
             }else{
                 //If user changes the difficulty level reset game
-                difficultyLevel = selectedDifficultyLevel - 1
+                difficultyLevel = DificultyLevel.allCases[selectedDifficultyLevel]
                 resetCounter()
                 resetGame()
                 updateColor()
@@ -82,13 +86,13 @@ final class GameViewModel: ObservableObject {
     private func setAutoDifficulty() {
         switch scores.human {
         case 5..<10:
-            difficultyLevel = 1
+            difficultyLevel = .mid
             updateColor()
         case 10 ..< 1000:
-            difficultyLevel = 2
+            difficultyLevel = .high
             updateColor()
         default:
-            difficultyLevel = 0
+            difficultyLevel = .easy
             updateColor()
         }
     }
@@ -165,7 +169,7 @@ final class GameViewModel: ObservableObject {
         //If AI can win, then win
         //1.Posible win positions
         let winPattern: Set<Set<Int>> = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-        if difficultyLevel == 2 {
+        if difficultyLevel == .high {
             //2.Remove nils from all positions and then filter to get only computer positions
             let computerMoves = moves.compactMap { $0 }.filter{$0.player == .computer}
             //3.Get all the indexes of the computer positions
@@ -183,7 +187,7 @@ final class GameViewModel: ObservableObject {
                 }
             }
         }
-        if difficultyLevel >= 1 {
+        if difficultyLevel == .mid || difficultyLevel == .high {
             //If AI can't win, then block(Similar to above but this time we check for human moves to block
             
             //1.Remove nils from all positions and then filter to get only computer positions
@@ -260,7 +264,14 @@ final class GameViewModel: ObservableObject {
     }
     
     private func updateColor(){
-        circleColor = colors[difficultyLevel]
+        switch difficultyLevel {
+        case .mid:
+            circleColor = colors[1]
+        case .high:
+            circleColor = colors[2]
+        default:
+            circleColor = colors[0]
+        }
     }
     
 }
