@@ -49,10 +49,10 @@ final class GameViewModel: ObservableObject {
             }else{
                 //If user changes the difficulty level reset game
                 difficultyLevel = DificultyLevel.allCases[selectedDifficultyLevel]
-                resetCounter()
-                resetGame()
                 updateColor()
             }
+            resetCounter()
+            resetGame()
         }
     }
     @Published var isSoundEnable: Bool = true

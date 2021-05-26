@@ -19,7 +19,7 @@
 		043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB352653887A00E51EB8 /* GameViewModel.swift */; };
 		04B5ED0426565118009220C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0326565118009220C3 /* GameModel.swift */; };
 		04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */; };
-		04EA4274265E3EC700427E1E /* Tic_Tac_ToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA4273265E3EC700427E1E /* Tic_Tac_ToeTests.swift */; };
+		04EA427C265E3FA400427E1E /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA427B265E3FA400427E1E /* ViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +48,8 @@
 		04B5ED0326565118009220C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsPlayer.swift; sourceTree = "<group>"; };
 		04EA4271265E3EC700427E1E /* Tic Tac ToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tic Tac ToeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		04EA4273265E3EC700427E1E /* Tic_Tac_ToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tic_Tac_ToeTests.swift; sourceTree = "<group>"; };
 		04EA4275265E3EC700427E1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EA427B265E3FA400427E1E /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +159,8 @@
 		04EA4272265E3EC700427E1E /* Tic Tac ToeTests */ = {
 			isa = PBXGroup;
 			children = (
-				04EA4273265E3EC700427E1E /* Tic_Tac_ToeTests.swift */,
 				04EA4275265E3EC700427E1E /* Info.plist */,
+				04EA427B265E3FA400427E1E /* ViewModelTest.swift */,
 			);
 			path = "Tic Tac ToeTests";
 			sourceTree = "<group>";
@@ -217,6 +217,7 @@
 					};
 					04EA4270265E3EC700427E1E = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 						TestTargetID = 040D1AFF264BA4C4004245CF;
 					};
 				};
@@ -281,7 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04EA4274265E3EC700427E1E /* Tic_Tac_ToeTests.swift in Sources */,
+				04EA427C265E3FA400427E1E /* ViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3P8URX7UV;
 				INFOPLIST_FILE = "Tic Tac ToeTests/Info.plist";
@@ -470,6 +472,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.productions.fritzgt.Tic-Tac-ToeTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tic Tac Toe.app/Tic Tac Toe";
@@ -480,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3P8URX7UV;
 				INFOPLIST_FILE = "Tic Tac ToeTests/Info.plist";
