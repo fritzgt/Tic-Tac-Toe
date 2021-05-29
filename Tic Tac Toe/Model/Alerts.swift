@@ -16,15 +16,15 @@ struct AlertItem: Identifiable {
 
 
 struct AlertContext {
-    static let player1 = AlertItem(title: Text("Player 1 Win!"),
-                             message: Text("Congratulations you have won!"),
-                             butonTitle: Text("Play again"))
+    static let player1 = AlertItem(title: Text("🏆"),
+                             message: Text("Congratulations Player 1 have won!"),
+                             butonTitle: Text("Continue"))
     
-    static let player2 = AlertItem(title: Text("Player 2 Win!"),
-                             message: Text("Congratulations you have won!"),
-                             butonTitle: Text("Play again"))
+    static let player2 = AlertItem(title: Text("🏆"),
+                             message: Text("Congratulations Player 2 have won!"),
+                             butonTitle: Text("Continue"))
     
-    static let computer = AlertItem(title: Text("You Lost"),
+    static let computer = AlertItem(title: Text("❌"),
                              message: Text("A.I have won."),
                              butonTitle: Text("Play again"))
     

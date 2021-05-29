@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,9 @@
 		043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB352653887A00E51EB8 /* GameViewModel.swift */; };
 		04B5ED0426565118009220C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0326565118009220C3 /* GameModel.swift */; };
 		04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */; };
+		04B8EC0D2661838900C1294C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 04B8EC0C2661838900C1294C /* Lottie */; };
+		04B8EC162662127300C1294C /* won-confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = 04B8EC142662127300C1294C /* won-confetti.json */; };
+		04B8EC172662127300C1294C /* lost-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 04B8EC152662127300C1294C /* lost-animation.json */; };
 		04EA427C265E3FA400427E1E /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA427B265E3FA400427E1E /* ViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,8 @@
 		043FCB352653887A00E51EB8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		04B5ED0326565118009220C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsPlayer.swift; sourceTree = "<group>"; };
+		04B8EC142662127300C1294C /* won-confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "won-confetti.json"; sourceTree = "<group>"; };
+		04B8EC152662127300C1294C /* lost-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lost-animation.json"; sourceTree = "<group>"; };
 		04EA4271265E3EC700427E1E /* Tic Tac ToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tic Tac ToeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04EA4275265E3EC700427E1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04EA427B265E3FA400427E1E /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B8EC0D2661838900C1294C /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +104,7 @@
 				04B5ED0F26565474009220C3 /* Helpers */,
 				0426876626565B4D0029651F /* Sounds */,
 				040D1B07264BA4C8004245CF /* Assets.xcassets */,
+				04B8EC132662127300C1294C /* Animations */,
 				040D1B0C264BA4C8004245CF /* Info.plist */,
 				040D1B09264BA4C8004245CF /* Preview Content */,
 			);
@@ -156,6 +163,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		04B8EC132662127300C1294C /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				04B8EC142662127300C1294C /* won-confetti.json */,
+				04B8EC152662127300C1294C /* lost-animation.json */,
+			);
+			name = Animations;
+			path = ../../../Downloads/Animations;
+			sourceTree = "<group>";
+		};
 		04EA4272265E3EC700427E1E /* Tic Tac ToeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +198,9 @@
 			dependencies = (
 			);
 			name = "Tic Tac Toe";
+			packageProductDependencies = (
+				04B8EC0C2661838900C1294C /* Lottie */,
+			);
 			productName = "Tic Tac Toe";
 			productReference = 040D1B00264BA4C4004245CF /* Tic Tac Toe.app */;
 			productType = "com.apple.product-type.application";
@@ -231,6 +251,9 @@
 				Base,
 			);
 			mainGroup = 040D1AF7264BA4C4004245CF;
+			packageReferences = (
+				04B8EC0B2661838900C1294C /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 040D1B01264BA4C4004245CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -248,8 +271,10 @@
 			files = (
 				0426876426565B450029651F /* player1.wav in Resources */,
 				0426876F2656643F0029651F /* lose.wav in Resources */,
+				04B8EC172662127300C1294C /* lost-animation.json in Resources */,
 				040D1B0B264BA4C8004245CF /* Preview Assets.xcassets in Resources */,
 				0426876C26565BAA0029651F /* winner.wav in Resources */,
+				04B8EC162662127300C1294C /* won-confetti.json in Resources */,
 				0426876926565BA30029651F /* player2.wav in Resources */,
 				040D1B08264BA4C8004245CF /* Assets.xcassets in Resources */,
 			);
@@ -531,6 +556,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		04B8EC0B2661838900C1294C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		04B8EC0C2661838900C1294C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B8EC0B2661838900C1294C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 040D1AF8264BA4C4004245CF /* Project object */;
 }

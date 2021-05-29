@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct GameView: View {
     
     @StateObject var viewModel = GameViewModel()
+    
+  
     
     var body: some View {
         GeometryReader { geometry in
@@ -17,10 +20,8 @@ struct GameView: View {
             VStack{
                 
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
-//                    Spacer()
                     Image(systemName: "person.fill").tag(0)
                     Image(systemName: "person.2.fill").tag(1)
-//                    Spacer()
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 
@@ -71,7 +72,28 @@ struct GameView: View {
                 Spacer()
             }
             
-            
+            //MARK: - LottieView
+            if viewModel.playAnimation {
+                HStack{
+                    Spacer()
+                    VStack{
+                        Spacer()
+                        ZStack{
+                            
+                            //TODO: Setup logic
+                            LottieView(fileName: viewModel.animationName)//61518-confetti 14995-roger
+                                .zIndex(1)
+                                
+                        }
+                        .frame(width: 360, height: 360)
+                        .cornerRadius(30)
+                        .shadow(radius: 30)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
+          
             
             VStack{
                 Spacer()
@@ -92,6 +114,7 @@ struct GameView: View {
             .padding()
             .alert(item: $viewModel.alertItem, content: { alertItem in
                 Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { viewModel.resetGame() }))
+                
             })
             //Place Google ads here
             VStack{
@@ -103,8 +126,8 @@ struct GameView: View {
                     Text("Advance").tag(3)
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                .disabled(viewModel.playingMode == 1)
-               
+                .disabled(viewModel.playingMode == 1)//if multiplayer is selected disable this option
+                
             }
             
         }
@@ -129,6 +152,38 @@ struct GameSquareView: View {
                    height: proxy.size.width/3 - 15)
             .scaleEffect(viewModel.moves[index] == nil ? 1.0 : 0.2)
             .animation(.default)
+    }
+}
+
+//MARK: - LottieView
+struct LottieView: UIViewRepresentable {
+    
+    let animationView = AnimationView()
+    var fileName: String
+    
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+        let view = UIView()
+        
+        //Setup the animation
+        let animation = Animation.named(fileName)
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFit
+        animationView.play()
+        
+        //Constrains
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(animationView)
+        
+        NSLayoutConstraint.activate([
+            animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            animationView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+        
+        return view
+    }
+    //Require to conform to UIViewRepresentable
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
+        
     }
 }
 
