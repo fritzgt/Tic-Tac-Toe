@@ -56,8 +56,8 @@ final class GameViewModel: ObservableObject {
         }
     }
     @Published var isSoundEnable: Bool = true
-    @Published var playAnimation = false
-    @Published var animationName: String = "won-confetti"
+    @Published var playAnimation = true
+    @Published var animationName: String = "confetti"
     
     // MARK: - Methods
     func processPlayerMove(for position: Int) {
@@ -88,11 +88,16 @@ final class GameViewModel: ObservableObject {
         case 5..<10:
             difficultyLevel = .mid
             updateColor()
-            self.playAnimation.toggle()
+            if scores.human == 5 {
+                self.playAnimation.toggle()
+            }
+            
         case 10 ..< 1000:
             difficultyLevel = .high
             updateColor()
-            self.playAnimation.toggle()
+            if scores.human == 10 {
+                self.playAnimation.toggle()
+            }
         default:
             difficultyLevel = .easy
             updateColor()

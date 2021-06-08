@@ -11,14 +11,11 @@ import Lottie
 struct GameView: View {
     
     @StateObject var viewModel = GameViewModel()
-    
-  
-    
+
     var body: some View {
         GeometryReader { geometry in
             
             VStack{
-                
                 Picker(selection: $viewModel.playingMode, label: Text("Playing Mode")) {
                     Image(systemName: "person.fill").tag(0)
                     Image(systemName: "person.2.fill").tag(1)
@@ -73,17 +70,14 @@ struct GameView: View {
             }
             
             //MARK: - LottieView
-            if viewModel.playAnimation {
+//            if viewModel.playAnimation {
                 HStack{
                     Spacer()
                     VStack{
                         Spacer()
                         ZStack{
-                            
-                            //TODO: Setup logic
-                            LottieView(fileName: viewModel.animationName)//61518-confetti 14995-roger
+                            LottieView(animationName: "Zoom")
                                 .zIndex(1)
-                                
                         }
                         .frame(width: 360, height: 360)
                         .cornerRadius(30)
@@ -92,8 +86,7 @@ struct GameView: View {
                     }
                     Spacer()
                 }
-            }
-          
+//            }
             
             VStack{
                 Spacer()
@@ -152,38 +145,6 @@ struct GameSquareView: View {
                    height: proxy.size.width/3 - 15)
             .scaleEffect(viewModel.moves[index] == nil ? 1.0 : 0.2)
             .animation(.default)
-    }
-}
-
-//MARK: - LottieView
-struct LottieView: UIViewRepresentable {
-    
-    let animationView = AnimationView()
-    var fileName: String
-    
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
-        let view = UIView()
-        
-        //Setup the animation
-        let animation = Animation.named(fileName)
-        animationView.animation = animation
-        animationView.contentMode = .scaleAspectFit
-        animationView.play()
-        
-        //Constrains
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(animationView)
-        
-        NSLayoutConstraint.activate([
-            animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            animationView.widthAnchor.constraint(equalTo: view.widthAnchor)
-        ])
-        
-        return view
-    }
-    //Require to conform to UIViewRepresentable
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
-        
     }
 }
 
