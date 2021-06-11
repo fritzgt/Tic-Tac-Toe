@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import Lottie
+//import Lottie
 
 struct GameView: View {
     
     @StateObject var viewModel = GameViewModel()
-
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -71,21 +71,21 @@ struct GameView: View {
             
             //MARK: - LottieView
 //            if viewModel.playAnimation {
-                HStack{
-                    Spacer()
-                    VStack{
-                        Spacer()
-                        ZStack{
-                            LottieView(animationName: "Zoom")
-                                .zIndex(1)
-                        }
-                        .frame(width: 360, height: 360)
-                        .cornerRadius(30)
-                        .shadow(radius: 30)
-                        Spacer()
-                    }
-                    Spacer()
-                }
+//                HStack{
+//                    Spacer()
+//                    VStack{
+//                        Spacer()
+//                        ZStack{
+//                            LottieView(animationName: "Zoom")
+//                                .zIndex(1)
+//                        }
+//                        .frame(width: 360, height: 360)
+//                        .cornerRadius(30)
+//                        .shadow(radius: 30)
+//                        Spacer()
+//                    }
+//                    Spacer()
+//                }
 //            }
             
             VStack{
@@ -109,9 +109,14 @@ struct GameView: View {
                 Alert(title: alertItem.title, message: alertItem.message, dismissButton: .default(alertItem.butonTitle, action: { viewModel.resetGame() }))
                 
             })
-            //Place Google ads here
+            
+            
+            
             VStack{
                 Spacer()
+                //Google ads here
+                Banner()
+                
                 Picker(selection: $viewModel.selectedDifficultyLevel, label: Text("Pick Level")) {
                     Text("Auto").tag(0)
                     Text("Easy").tag(1)

@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct Tic_Tac_ToeApp: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             GameView()

@@ -15,13 +15,17 @@
 		0426876926565BA30029651F /* player2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876826565BA30029651F /* player2.wav */; };
 		0426876C26565BAA0029651F /* winner.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876B26565BAA0029651F /* winner.wav */; };
 		0426876F2656643F0029651F /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0426876E2656643F0029651F /* lose.wav */; };
+		042B16E4267271AE00F393BE /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042B16C726726FF400F393BE /* GoogleAppMeasurement.xcframework */; };
+		042B16E8267271B500F393BE /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042B16C226725E6100F393BE /* GoogleMobileAds.xcframework */; };
+		042B16EC26735EB000F393BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042B16EB26735EB000F393BE /* AppDelegate.swift */; };
 		043FCB332652627200E51EB8 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB322652627200E51EB8 /* Alerts.swift */; };
 		043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FCB352653887A00E51EB8 /* GameViewModel.swift */; };
+		044EEF4626736C32005371B0 /* Pods_Tic_Tac_Toe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044EEF4526736C32005371B0 /* Pods_Tic_Tac_Toe.framework */; };
 		048F2A22266CC4FA00229DE1 /* Lottie-Animations in Resources */ = {isa = PBXBuildFile; fileRef = 048F2A21266CC4FA00229DE1 /* Lottie-Animations */; };
 		048F2A28266CCD8B00229DE1 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F2A27266CCD8B00229DE1 /* LottieView.swift */; };
+		048F2A3E266F86AD00229DE1 /* AdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F2A3D266F86AD00229DE1 /* AdMob.swift */; };
 		04B5ED0426565118009220C3 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0326565118009220C3 /* GameModel.swift */; };
 		04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */; };
-		04B8EC0D2661838900C1294C /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 04B8EC0C2661838900C1294C /* SwiftPackageProductDependency */; };
 		04EA427C265E3FA400427E1E /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA427B265E3FA400427E1E /* ViewModelTest.swift */; };
 		E95E8243FE2715D9E1453A1E /* Pods_Tic_Tac_Toe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F37AED2E7C8A4FBCC73957FC /* Pods_Tic_Tac_Toe.framework */; };
 		F31F8A406D9025CDF982526C /* Pods_Tic_Tac_ToeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C7513361E16DA62492F9E5 /* Pods_Tic_Tac_ToeTests.framework */; };
@@ -48,10 +52,16 @@
 		0426876826565BA30029651F /* player2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player2.wav; sourceTree = "<group>"; };
 		0426876B26565BAA0029651F /* winner.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = winner.wav; sourceTree = "<group>"; };
 		0426876E2656643F0029651F /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		042B16C226725E6100F393BE /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
+		042B16C726726FF400F393BE /* GoogleAppMeasurement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAppMeasurement.xcframework; path = Pods/GoogleAppMeasurement/Frameworks/GoogleAppMeasurement.xcframework; sourceTree = "<group>"; };
+		042B16EB26735EB000F393BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		043FCB322652627200E51EB8 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		043FCB352653887A00E51EB8 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		044EEF3526736BEF005371B0 /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Lottie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		044EEF4526736C32005371B0 /* Pods_Tic_Tac_Toe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Tic_Tac_Toe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		048F2A21266CC4FA00229DE1 /* Lottie-Animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Lottie-Animations"; sourceTree = "<group>"; };
 		048F2A27266CCD8B00229DE1 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		048F2A3D266F86AD00229DE1 /* AdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMob.swift; sourceTree = "<group>"; };
 		04B5ED0326565118009220C3 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		04B5ED0A2656546B009220C3 /* SoundsPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsPlayer.swift; sourceTree = "<group>"; };
 		04EA4271265E3EC700427E1E /* Tic Tac ToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tic Tac ToeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,8 +80,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B8EC0D2661838900C1294C /* BuildFile in Frameworks */,
+				042B16E4267271AE00F393BE /* GoogleAppMeasurement.xcframework in Frameworks */,
 				E95E8243FE2715D9E1453A1E /* Pods_Tic_Tac_Toe.framework in Frameworks */,
+				044EEF4626736C32005371B0 /* Pods_Tic_Tac_Toe.framework in Frameworks */,
+				042B16E8267271B500F393BE /* GoogleMobileAds.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +121,7 @@
 		040D1B02264BA4C4004245CF /* Tic Tac Toe */ = {
 			isa = PBXGroup;
 			children = (
+				042B16EB26735EB000F393BE /* AppDelegate.swift */,
 				040D1B03264BA4C4004245CF /* Tic_Tac_ToeApp.swift */,
 				04B5ED01265650E9009220C3 /* Views */,
 				04B5ED02265650F3009220C3 /* View Model */,
@@ -147,6 +160,7 @@
 			children = (
 				040D1B05264BA4C4004245CF /* GameView.swift */,
 				048F2A27266CCD8B00229DE1 /* LottieView.swift */,
+				048F2A3D266F86AD00229DE1 /* AdMob.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +202,10 @@
 		6BAE377AC849777C0EBC161E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				044EEF4526736C32005371B0 /* Pods_Tic_Tac_Toe.framework */,
+				044EEF3526736BEF005371B0 /* Lottie.framework */,
+				042B16C726726FF400F393BE /* GoogleAppMeasurement.xcframework */,
+				042B16C226725E6100F393BE /* GoogleMobileAds.xcframework */,
 				F37AED2E7C8A4FBCC73957FC /* Pods_Tic_Tac_Toe.framework */,
 				26C7513361E16DA62492F9E5 /* Pods_Tic_Tac_ToeTests.framework */,
 			);
@@ -202,7 +220,6 @@
 				29D6A6AA6C60E156FD266266 /* Pods-Tic Tac ToeTests.debug.xcconfig */,
 				7C12F2D9DE113E511CF9B38B /* Pods-Tic Tac ToeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -224,7 +241,6 @@
 			);
 			name = "Tic Tac Toe";
 			packageProductDependencies = (
-				04B8EC0C2661838900C1294C /* SwiftPackageProductDependency */,
 			);
 			productName = "Tic Tac Toe";
 			productReference = 040D1B00264BA4C4004245CF /* Tic Tac Toe.app */;
@@ -279,7 +295,6 @@
 			);
 			mainGroup = 040D1AF7264BA4C4004245CF;
 			packageReferences = (
-				04B8EC0B2661838900C1294C /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 040D1B01264BA4C4004245CF /* Products */;
 			projectDirPath = "";
@@ -385,7 +400,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				043FCB362653887A00E51EB8 /* GameViewModel.swift in Sources */,
+				048F2A3E266F86AD00229DE1 /* AdMob.swift in Sources */,
 				040D1B06264BA4C4004245CF /* GameView.swift in Sources */,
+				042B16EC26735EB000F393BE /* AppDelegate.swift in Sources */,
 				043FCB332652627200E51EB8 /* Alerts.swift in Sources */,
 				04B5ED0B2656546B009220C3 /* SoundsPlayer.swift in Sources */,
 				048F2A28266CCD8B00229DE1 /* LottieView.swift in Sources */,
@@ -653,25 +670,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		04B8EC0B2661838900C1294C /* RemoteSwiftPackageReference */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		04B8EC0C2661838900C1294C /* SwiftPackageProductDependency */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04B8EC0B2661838900C1294C /* RemoteSwiftPackageReference */;
-			productName = Lottie;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 040D1AF8264BA4C4004245CF /* Project object */;
 }
